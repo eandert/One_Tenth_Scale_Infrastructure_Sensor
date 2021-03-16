@@ -18,8 +18,6 @@ outputFrame = None
 outputCoordinates = None
 lock = threading.Lock()
 
-KDTREESEARCH_LIMIT = 10000
-
 # This class holds the default camera configurations for the 2 recorded videos as well as the default guess for the
 # configuation outlined in the readme
 class CameraSpecifications:
@@ -35,9 +33,9 @@ class CameraSpecifications:
         elif defaultTrafficCam:
             # Use default settign for pre-recorded traffic cam setup
             self.cameraAdjustmentAngle = 0.0
-            self.cameraHeight = 2.0
-            self.hFOV = 157.0  # 2 * math.atan( / focalLength)
-            self.vFOV = 155.0
+            self.cameraHeight = 0.5
+            self.hFOV = 160.0  # 2 * math.atan( / focalLength)
+            self.vFOV = 146.0
             self.imageWidth = 1280
             self.imageHeight = 720
             self.focalLength = self.imageHeight / 2 / math.tan(self.vFOV / 2.0)
@@ -479,12 +477,14 @@ class YOLO:
                         # Calculate the crosssection (width) of vehicle being detected for error math
                         crossSection = math.sin(math.radians((xmax - xmin) * (self.cameraSpecs.cameraHeight / self.cameraSpecs.imageWidth))) * distancei
                         detections_list.append([tracked_items.index(name_key), confidence * 100, x_actual, y_actual, crossSection])
+                        print ( " detection: ", x_actual, y_actual )
 
         # Call the matching function to modilfy our detections in trackedList
         self.matchDetections(detections_position_list, detections_list, timestamp)
 
         for detection in self.trackedList:
             if detection.lastHistory >= 1:
+                print ( " detection: ", detection.x, detection.y )
                 #xmin, ymin, xmax, ymax = convertBack(float(detection.x), float(detection.y), float(detection.width), float(detection.height))
                 pt1 = (detection.xmin, detection.ymin)
                 pt2 = (detection.xmax, detection.ymax)
