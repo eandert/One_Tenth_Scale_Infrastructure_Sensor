@@ -1,5 +1,7 @@
 # One_Tenth_Scale_Infrastructure_Sensor
 
+THis repositoy is no archived because the code now resides in a single larger project, https://github.com/eandert/One_Tenth_Scale_Autonomous_Vehicle
+
 This repository is a stripped down version of One_Tenth_Scale_Autonomous_Vehicle. It contains the code for a camera sensor that is stationary.
 
 To install, download the SD card image and upload to 64 GB SD card. This will save days of building the correct libraries, etc. TODO: Place google drive link here. Clone this repo on the Home/Projects/ folder.
